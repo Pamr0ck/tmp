@@ -53,7 +53,7 @@ void rgroup(char * alf,char* origin){
                     }
                     k++;
                     printf("%d ------- %c\n",k,tmp);
-                    printf("%s\n", alf);
+                    //printf("%s\n", alf);
                     
                 }
                 de = readdir(dir);
@@ -69,6 +69,6 @@ void rgroup(char * alf,char* origin){
 int main(){
     char* alf= calloc(sizeof(char),SIZE); //алфавит для избежания создания двух одинаковых папок
     rgroup(alf,"./");
-    printf("%s",alf);
+    printf("%s\n",alf);
     return 0;
 }
