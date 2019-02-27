@@ -11,6 +11,7 @@
 void rm(char * strok,char* origin){
     char file[SIZE]="";
     size_t len=strlen(strok);
+    char buf[SIZE]="";
     int k;
     DIR *dir = opendir(origin);
     if(dir) {
@@ -18,7 +19,6 @@ void rm(char * strok,char* origin){
         while (de) {
             k=0;
             if(de->d_type==4 && de->d_name[0]!='.') {
-                char buf[SIZE];
                 strcat(buf,origin);
                 strcat(buf,"/");
                 strcat(buf,de->d_name);
