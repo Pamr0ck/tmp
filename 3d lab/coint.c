@@ -10,6 +10,7 @@
 
 int coint(char * strok,char* origin){
     char file[SIZE]="";
+    int size=0;
     static int total=0;
     int len_myne=0;
     size_t len=strlen(strok);
@@ -32,10 +33,11 @@ int coint(char * strok,char* origin){
                 for(int t= (int) (strlen(de->d_name) - 1); t > 0; t--){
                     if (de->d_name[t]=='.'){
                         len_myne=t+1;
+                        size=strlen(de->d_name)-len_myne;
                         break;
                     }
                 }
-                if(!strncmp(strok,de->d_name+len_myne,len)){
+                if(!strncmp(strok,de->d_name+len_myne,len)&& size==len){
                     strcat(file,origin);
                     strcat(file,"/");
                     strcat(file,de->d_name);

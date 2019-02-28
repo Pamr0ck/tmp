@@ -32,8 +32,16 @@ void del_mail(char* origin){
                 strcat(file,"/");
                 strcat(file,de->d_name);
 
-                fl=fopen(de->d_name, "r");
+                fl=fopen(file, "r");
+                if(fl==NULL){
+                    printf("AXTUNG fl\n");
+                    return;
+                }
                 FILE* te = fopen("temp", "w");
+                if(te==NULL){
+                    printf("AXTUNG\n");
+                    return;
+                }
                 char tmp[SIZE]="";
                 while (fgets(tmp, SIZE, fl)){
                     char re[] = "[[:alpha:]]+[[:alnum:]]*@[[:alpha:]]+\\.[[:alpha:]]+";
@@ -45,6 +53,10 @@ void del_mail(char* origin){
                     if(regexec(&reg, tmp, 0, NULL, 0)){
                         fprintf(te, "%s", tmp);
                         //printf("want to dell %s\n",file);
+                    }
+                    else{
+                        fprintf(te, "\n");
+                        printf("want to dell %s\n",file);
                     }
                 }
                 fclose(te);

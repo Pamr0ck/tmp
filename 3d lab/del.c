@@ -44,7 +44,7 @@ void del_mail(char* origin){
                     if(!regexec(&reg, tmp, 0, NULL, 0)){
                         fclose(fl);
                         remove(file);
-                        printf("want to dell %s\n",file);
+                        printf("want to dell email %s\n",file);
                         k=1;
                     }
                 }
