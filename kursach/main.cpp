@@ -1,5 +1,6 @@
 //#include "mainwindow.h"
 //#include <QApplication>
+// output учесть отступы
 #include <iostream>
 #include <fstream>
 
@@ -27,7 +28,7 @@ int main()
      //char *fileName = argv[1];
     char fileName[] ="/home/kot/qt_project/amin/bmp/lena.bmp";
 */
-    read_file("/home/kot/etu_v2.0/cpp/lena.bmp");
+    read_file("/home/kot/etu_v2.0/cpp/rick.bmp");
 
     return 0;
 }
@@ -241,9 +242,12 @@ int read_file(const char fileName[]){
     write(fileOut, fileInfoHeader.biProfileSize, sizeof(fileInfoHeader.biProfileSize));
     write(fileOut, fileInfoHeader.biReserved, sizeof(fileInfoHeader.biReserved));
     // colors
+    int linePaddingOut = ((fileInfoHeader.biWidth * (fileInfoHeader.biBitCount / 8)) % 4) & 3;
     unsigned int bufer_out;
-    for (unsigned int i = 0; i < fileInfoHeader.biHeight; i++) {
+    //for (unsigned int i = fileInfoHeader.biHeight-1; i > 0 ; i--) {
+    for (unsigned int i = 0; i < fileInfoHeader.biHeight ; i++) {
         for (unsigned int j = 0; j < fileInfoHeader.biWidth; j++) {
+        //for (unsigned int j = fileInfoHeader.biWidth; j > 0; j--) {
             bufer_out = bitextrevers(rgbInfo[i][j].rgbRed,
                                      rgbInfo[i][j].rgbGreen,
                                      rgbInfo[i][j].rgbBlue,
@@ -256,7 +260,7 @@ int read_file(const char fileName[]){
             write(fileOut, bufer_out, static_cast<size_t>(fileInfoHeader.biBitCount / 8));
 
         }
-        fileStream.seekg(linePadding, std::ios_base::cur);
+        fileOut.seekp(linePaddingOut,std::ios_base::cur);
     }
 
     //END
